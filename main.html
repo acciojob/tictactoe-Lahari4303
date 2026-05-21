@@ -79,7 +79,7 @@
             msg.textContent = `${player1}, you're up`
         })
         
-        let currentPlayer='X'
+        let currentPlayer='x'
         let count=0
         let cells = document.querySelectorAll(".cell")
         cells.forEach(function(cell){
@@ -91,19 +91,19 @@
                     return
                 }
                 count++
-                if(currentPlayer=='X'){
-                    cell.textContent = "X"
+                if(currentPlayer=='x'){
+                    cell.textContent = "x"
                     if(count>4) checkWinner()
                     if(!gameOver){
-                        currentPlayer = "O"
+                        currentPlayer = "o"
                         msg.textContent = `${player2}, you're up`
                     }
                 }
                 else{
-                    cell.textContent = "O"
+                    cell.textContent = "o"
                     if(count>4) checkWinner()
                     if(!gameOver){
-                        currentPlayer = "X"
+                        currentPlayer = "x"
                         msg.textContent = `${player1}, you're up`
                     }
                 }
@@ -125,11 +125,11 @@
                 let box3 = document.getElementById(pattern[2]).textContent
                 if(box1 !=="" && box1===box2 && box2==box3){
                     gameOver = true
-                    if(box1 === "X"){
-                        msg.textContent = `${player1}, congratulations you won!`
+                    if(box1 === "x"){
+                        msg.textContent = `${player1} congratulations you won!`
                     }
                     else{
-                        msg.textContent = `${player2}, congratulations you won!`
+                        msg.textContent = `${player2} congratulations you won!`
                     }
                 }
             })
