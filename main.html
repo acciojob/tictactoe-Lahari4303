@@ -36,16 +36,16 @@
     </style>
 </head>
 <body>
-    <h1>TIC TAC TOE</h1>
+    <h1>Tic Tac Toe</h1>
     <div class="container">
         <div class="player-form">
             <div>
                 <label>Player 1</label>
-                <input type="text" id="p1" placeholder="enter name">
+                <input type="text" id="player1" placeholder="enter name">
             </div>
             <div>
                 <label>Player 2</label>
-                <input type="text" id="p2" placeholder="enter name">
+                <input type="text" id="player2" placeholder="enter name">
             </div>
             <button id="submit">Start Game</button>
         </div>
@@ -72,8 +72,8 @@
         let btn=document.getElementById("submit")
         let msg=document.querySelector(".message")
         btn.addEventListener("click",function(){
-            player1 = document.getElementById("p1").value
-            player2 = document.getElementById("p2").value
+            player1 = document.getElementById("player1").value
+            player2 = document.getElementById("player2").value
             document.querySelector(".player-form").style.display = "none"
             document.querySelector(".game-board").style.display = "block"
             msg.textContent = `${player1}, you're up`
@@ -84,13 +84,13 @@
         let cells = document.querySelectorAll(".cell")
         cells.forEach(function(cell){
             cell.addEventListener("click", function(){
-                count++
                 if(gameOver){
                     return
                 }
                 if(cell.textContent !==""){
                     return
                 }
+                count++
                 if(currentPlayer=='X'){
                     cell.textContent = "X"
                     if(count>4) checkWinner()
@@ -126,10 +126,10 @@
                 if(box1 !=="" && box1===box2 && box2==box3){
                     gameOver = true
                     if(box1 === "X"){
-                        msg.textContent = `${player1} congratulations you won!`
+                        msg.textContent = `${player1}, congratulations you won!`
                     }
                     else{
-                        msg.textContent = `${player2} congratulations you won!`
+                        msg.textContent = `${player2}, congratulations you won!`
                     }
                 }
             })
