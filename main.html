@@ -1,16 +1,139 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            text-align: center;
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        .player-form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 4px;
+        }
+        .game-board{
+            display: none;
+        }
+         .board{
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            background-color: rgb(247, 158, 202);
+        }
+        .cell{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+        }
+    </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <h1>TIC TAC TOE</h1>
+    <div class="container">
+        <div class="player-form">
+            <div>
+                <label>Player 1</label>
+                <input type="text" id="p1" placeholder="enter name">
+            </div>
+            <div>
+                <label>Player 2</label>
+                <input type="text" id="p2" placeholder="enter name">
+            </div>
+            <button id="submit">Start Game</button>
+        </div>
 
+        <div class="game-board">
+            <div class="message"></div>
+            <div class="board">
+                <div class="cell" id="1"></div>
+                <div class="cell" id="2"></div>
+                <div class="cell" id="3"></div>
+                <div class="cell" id="4"></div>
+                <div class="cell" id="5"></div>
+                <div class="cell" id="6"></div>
+                <div class="cell" id="7"></div>
+                <div class="cell" id="8"></div>
+                <div class="cell" id="9"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let player1 = ""
+        let player2 = ""
+        let btn=document.getElementById("submit")
+        let msg=document.querySelector(".message")
+        btn.addEventListener("click",function(){
+            player1 = document.getElementById("p1").value
+            player2 = document.getElementById("p2").value
+            document.querySelector(".player-form").style.display = "none"
+            document.querySelector(".game-board").style.display = "block"
+            msg.textContent = `${player1}, you're up`
+        })
+        
+        let currentPlayer='X'
+        let count=0
+        let cells = document.querySelectorAll(".cell")
+        cells.forEach(function(cell){
+            cell.addEventListener("click", function(){
+                count++
+                if(gameOver){
+                    return
+                }
+                if(cell.textContent !==""){
+                    return
+                }
+                if(currentPlayer=='X'){
+                    cell.textContent = "X"
+                    if(count>4) checkWinner()
+                    if(!gameOver){
+                        currentPlayer = "O"
+                        msg.textContent = `${player2}, you're up`
+                    }
+                }
+                else{
+                    cell.textContent = "O"
+                    if(count>4) checkWinner()
+                    if(!gameOver){
+                        currentPlayer = "X"
+                        msg.textContent = `${player1}, you're up`
+                    }
+                }
+            })
+        })
+        let winPatterns = [ [1,2,3],
+                            [4,5,6],
+                            [7,8,9],
+                            [1,4,7],
+                            [2,5,8],
+                            [3,6,9],
+                            [1,5,9],
+                            [3,5,7]]
+        let gameOver = false
+        function checkWinner(){
+            winPatterns.forEach(function(pattern){
+                let box1 = document.getElementById(pattern[0]).textContent
+                let box2 = document.getElementById(pattern[1]).textContent
+                let box3 = document.getElementById(pattern[2]).textContent
+                if(box1 !=="" && box1===box2 && box2==box3){
+                    gameOver = true
+                    if(box1 === "X"){
+                        msg.textContent = `${player1} congratulations you won!`
+                    }
+                    else{
+                        msg.textContent = `${player2} congratulations you won!`
+                    }
+                }
+            })
+        }
+    </script>
 </body>
-
 </html>
